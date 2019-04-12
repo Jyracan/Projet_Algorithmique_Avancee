@@ -90,23 +90,20 @@ public class Point {
      */
     public Point projectionOrthogonale(Ligne ligne)
     {
-        if(this.equals(ligne.getp1()))
-        {
+        if(this.equals(ligne.getp1())) {
             return this;
         }
-        else if (this.equals(ligne.getp2()))
-        {
+        else if (this.equals(ligne.getp2())) {
             return this;
         }
-        else
-        {
-            double a=(ligne.getp2()).getx() - ligne.getp1().getx();
-            double b=(ligne.getp2()).gety() - (ligne.getp1()).gety();
+        else {
+            double a = (ligne.getp2()).getx() - ligne.getp1().getx();
+            double b = (ligne.getp2()).gety() - ligne.getp1().gety();
 
-            double n=(a*(this.getx()-(ligne.getp2()).getx())) + (b*(this.gety()-(ligne.getp2()).gety()));
+            double n = ( a * ( this.getx() - ligne.getp2().getx() ) ) + ( b*(this.gety() - (ligne.getp2() ).gety()));
             n /= (Math.pow(2, a) + Math.pow(b, 2));
 
-            Point H=new Point(ligne.getp2().getx()+a*n, (ligne.getp2()).gety()+ n * b);
+            Point H=new Point(ligne.getp2().getx() + a * n, (ligne.getp2()).gety() + n * b);
             return H;
         }
     }

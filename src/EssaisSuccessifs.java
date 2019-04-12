@@ -29,6 +29,7 @@ public class EssaisSuccessifs {
                 segmentDroite.add(segmentCourant);
                 cout += pointHorsLigne.size() * PENALITE;
                 for (Point point : pointHorsLigne){
+                    System.out.println(segmentCourant.distance(point));
                     cout += segmentCourant.distance(point);
                 }
                 pointHorsLigne.clear();
@@ -40,6 +41,7 @@ public class EssaisSuccessifs {
         }
         segmentCourant = new Ligne(pointCourant, points[points.length-1]);
         cout += pointHorsLigne.size() * PENALITE;
+        System.out.println();
         for (Point point : pointHorsLigne){
             cout += segmentCourant.distance(point);
         }
@@ -55,12 +57,13 @@ public class EssaisSuccessifs {
         //Initialisation du tableau de point pour les obtenirs plus facilement
         Point[] points = new Point[nbPoints];
         Iterator<Point> it = setPoint.iterator();
-        int cpt = 0;
+        Point tmp;
         while(it.hasNext()){
-            points[cpt] = it.next();
-            cpt ++;
+            tmp = it.next();
+            System.out.println("Ajout du point X=" + tmp.getx() + " Y=" + tmp.gety());
+            points[(int)tmp.getx() - 1] = tmp;
         }
-
+        X[2]=true;
 
         System.out.println("###\nCalcul du cout " + calculCout(X, points));
     }

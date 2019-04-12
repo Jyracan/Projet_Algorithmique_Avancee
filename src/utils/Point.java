@@ -82,5 +82,44 @@ public class Point {
     public void affiche() {
         System.out.println(this.toString());
     }
+
+    /**
+     * Calcul de la projection orthogonale de ce point sur une ligne
+     * @param ligne
+     * @return La projection orthogonale de ce point à un ligne
+     */
+    public Point projectionOrthogonale(Ligne ligne)
+    {
+        if(this.equals(ligne.getp1()))
+        {
+            return this;
+        }
+        else if (this.equals(ligne.getp2()))
+        {
+            return this;
+        }
+        else
+        {
+            double a=(ligne.getp2()).getx() - ligne.getp1().getx();
+            double b=(ligne.getp2()).gety() - (ligne.getp1()).gety();
+
+            double n=(a*(this.getx()-(ligne.getp2()).getx())) + (b*(this.gety()-(ligne.getp2()).gety()));
+            n /= (Math.pow(2, a) + Math.pow(b, 2));
+
+            Point H=new Point(ligne.getp2().getx()+a*n, (ligne.getp2()).gety()+ n * b);
+            return H;
+        }
+    }
+
+    /**
+     * Calcul de la distance algébrique entre 2 points
+     * @param point
+     * @return La distance entre deux points
+     */
+    public double distance (Point point){
+        double x=Math.pow(((point.getx())-(this.getx())), 2.0);
+        double y=Math.pow(((point.gety())-(this.gety())), 2.0);
+        return Math.sqrt(x+y);
+    }
 }
 

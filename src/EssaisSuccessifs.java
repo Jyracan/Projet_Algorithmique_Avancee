@@ -14,7 +14,7 @@ public class EssaisSuccessifs {
 
     }
 
-    public static double calculCout (boolean[] present, Point[] points){
+    public static double calculCout (boolean[] present, Point[] points){    // TODO : Refactor !
         double cout = 0;
         Point pointCourant = points[0];
         Point pointSuivant;
@@ -52,6 +52,7 @@ public class EssaisSuccessifs {
         boolean[] X = new boolean[nbPoints-2]; // On crée notre tableau de point, on ne met pas le premier ni le dernier point dans ce tableau
         for (boolean point: X) point = false;   //On dit que tous les points ne sont pas dans le segment de droite
 
+        //Initialisation du tableau de point pour les obtenirs plus facilement
         Point[] points = new Point[nbPoints];
         Iterator<Point> it = setPoint.iterator();
         int cpt = 0;
@@ -59,8 +60,8 @@ public class EssaisSuccessifs {
             points[cpt] = it.next();
             cpt ++;
         }
-        Ligne segmentDroite = new Ligne(points[0], points[nbPoints-1]);
-        System.out.println(segmentDroite.distance(points[1]));
-        System.out.println(" Calcul du cout " + calculCout(X, points));
+
+
+        System.out.println("###\nCalcul du cout " + calculCout(X, points));
     }
 }

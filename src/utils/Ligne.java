@@ -21,7 +21,7 @@ public class Ligne {
 		Point projection = p.projectionOrthogonale(this);
 		return projection.distance(p);
 	}
-	
+
 	Point getp1(){return point1;}
 	Point getp2(){return point2;}
 

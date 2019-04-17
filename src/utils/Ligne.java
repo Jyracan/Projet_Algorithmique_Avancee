@@ -22,7 +22,7 @@ public class Ligne {
 		return projection.distance(p);
 	}
 
-	Point getp1(){return point1;}
-	Point getp2(){return point2;}
+	public Point getp1(){return point1;}
+	public Point getp2(){return point2;}
 
 }

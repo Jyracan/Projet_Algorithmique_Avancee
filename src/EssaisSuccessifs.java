@@ -81,7 +81,6 @@ public class EssaisSuccessifs {
             X[i-1] = true;
             if(calculCout(X,points) < scoreOpt){
                 double score = calculCout(X,points);
-                if(score < scoreOpt){
                     if(i == X.length){
                         //for(boolean b: X) System.out.print(b+" ");
                         //System.out.println(score + "\n");
@@ -90,7 +89,6 @@ public class EssaisSuccessifs {
                     }else{
                         appligbri_elagage(points,X,score,i+1);
                     }
-                }
                 X[i-1] = false;
                 score = calculCout(X,points);
                 appligbri_elagage(points,X,score,i+1);

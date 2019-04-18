@@ -11,7 +11,7 @@ public class StupidSolver {
     private static void essayerTout(HashSet<Point> setPoint){
         int nbPoints = setPoint.size();
         boolean[] X = new boolean[nbPoints-2]; // On crée notre tableau de point, on ne met pas le premier ni le dernier point dans ce tableau
-        Point [] points = transformToTab(setPoint);
+        Point [] points = utilsSolver.transformToTab(setPoint);
         int cpt = 0;
         double scoreTMP;
         double scoreOpt= utilsSolver.calculCout(X,points);
@@ -35,23 +35,6 @@ public class StupidSolver {
         utilsSolver.visualizeRes(points, Xopt, scoreOpt);
 
     }
-
-    private static Point[] transformToTab (HashSet<Point> setPoint){
-        int nbPoints = setPoint.size();
-        //Initialisation du tableau de point pour les obtenirs plus facilement
-        Point[] points = new Point[nbPoints];
-        Iterator<Point> it = setPoint.iterator();
-        Point tmp;
-        while(it.hasNext()){
-            tmp = it.next();
-            System.out.println("Ajout du point X= " + tmp.getx() + " Y= " + tmp.gety());
-            points[(int)tmp.getx() - 1] = tmp;
-        }
-        return points;
-    }
-
-
-
 
     public static void main(String[] args) {
         HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point

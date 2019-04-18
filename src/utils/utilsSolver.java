@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class utilsSolver {
@@ -67,5 +68,19 @@ public class utilsSolver {
         segmentCourant = new Ligne(pointCourant, points[points.length -1]);
         segmentDroite.add(segmentCourant);
         Visu v = new Visu(p,segmentDroite,"Solution de score " + score);
+    }
+
+    public static Point[] transformToTab (HashSet<Point> setPoint){
+        int nbPoints = setPoint.size();
+        //Initialisation du tableau de point pour les obtenirs plus facilement
+        Point[] points = new Point[nbPoints];
+        Iterator<Point> it = setPoint.iterator();
+        Point tmp;
+        while(it.hasNext()){
+            tmp = it.next();
+            System.out.println("Ajout du point X= " + tmp.getx() + " Y= " + tmp.gety());
+            points[(int)tmp.getx() - 1] = tmp;
+        }
+        return points;
     }
 }

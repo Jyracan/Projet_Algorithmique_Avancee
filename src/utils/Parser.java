@@ -23,7 +23,6 @@ public class Parser {
 
 	/**
 	 * Renvoie une liste de points lu dans un fichier
-	 * @param filePath Chemin d'accès au fichier
 	 * @return Liste de points lus dans filePath
 	 */
 	public static Set <Point> recuperePoints(){

@@ -59,7 +59,7 @@ public class Visu extends JFrame {
 		utils.Point p1 = new utils.Point(1.0,8.6);
 		utils.Point p2 = new utils.Point(2.0,25.8);
 		utils.Point p3 = new utils.Point(3.0,7.9);
-		utils.Point p4 = new utils.Point(4.5,5.0);
+		utils.Point p4 = new utils.Point(4.0,5.0);
 		utils.Point p5 = new utils.Point(5.0,8.6);
 		utils.Point p6 = new utils.Point(6.0,25.8);
 		utils.Point p7 = new utils.Point(7.0,7.9);

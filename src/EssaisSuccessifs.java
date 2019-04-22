@@ -61,15 +61,14 @@ public class EssaisSuccessifs {
         boolean[] X =  new boolean[setPoint.size() - 2];
         for(boolean b: X) b = false;
 
-        double dernierPointExplore =  points[0].getx();
-        double scoreOpt = utilsSolver.calculCout(X,points);
         solutionsPossibles = new HashMap<>();
 
         appligibri(points,X,1);
         System.out.println("Le programme a trouvé "+solutionsPossibles.size()+" solutions possibles, en calculant "+cpt+" combinaisons différentes");
 
-        double meilleurScore = scoreOpt; //on initialise le meilleur score à la pire valeur possible
+        double meilleurScore = utilsSolver.calculCout(X,points);; //on initialise le meilleur score à la pire valeur possible
         boolean[] Xopt;
+
         Set<Double> keys = solutionsPossibles.keySet();
         Iterator<Double> it = keys.iterator();
         while (it.hasNext()){

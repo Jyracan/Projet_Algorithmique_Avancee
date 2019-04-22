@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class utilsSolver {
+public class UtilsSolver {
 
     public static final double PENALITE = 1.5;
 
@@ -26,7 +26,6 @@ public class utilsSolver {
                 segmentCourant = new Ligne(pointCourant, pointSuivant);
                 segmentDroite.add(segmentCourant);
                 for (Point point : pointHorsLigne){
-                    System.out.println("Distance du point n°" + (int)point.getx() + " avec le segment courant = " + segmentCourant.distance(point));
                     cout += segmentCourant.distance(point);
                 }
                 pointHorsLigne.clear();
@@ -39,10 +38,8 @@ public class utilsSolver {
         segmentCourant = new Ligne(pointCourant, points[points.length-1]);
 
         cout += nbPointSegment * PENALITE;
-        System.out.println("Cout actuel = " + cout);
         for (Point point : pointHorsLigne){
             cout += segmentCourant.distance(point);
-            System.out.println("Distance du point n°" + point.getx() + " avec le segment courant = " + segmentCourant.distance(point));
         }
         return cout;
     }

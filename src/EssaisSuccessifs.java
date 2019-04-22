@@ -16,7 +16,7 @@ public class EssaisSuccessifs {
                 enregistrer(i,xi,X);
                 if(soltrouvee(i,X)){
                     cpt++;
-                    solutionsPossibles.put(utilsSolver.calculCout(X,points),X.clone());
+                    solutionsPossibles.put(UtilsSolver.calculCout(X,points),X.clone());
                 }else {
                     appligibri(points,X,i+1);
                 }
@@ -56,13 +56,13 @@ public class EssaisSuccessifs {
         HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
 
         Point[] points;
-        points = utilsSolver.transformToTab(setPoint);
+        points = UtilsSolver.transformToTab(setPoint);
 
         boolean[] X =  new boolean[setPoint.size() - 2];
         for(boolean b: X) b = false;
 
         double dernierPointExplore =  points[0].getx();
-        double scoreOpt = utilsSolver.calculCout(X,points);
+        double scoreOpt = UtilsSolver.calculCout(X,points);
         solutionsPossibles = new HashMap<>();
 
         appligibri(points,X,1);
@@ -79,6 +79,6 @@ public class EssaisSuccessifs {
             }
         }
         Xopt = solutionsPossibles.get(meilleurScore);
-        utilsSolver.visualizeRes(points,Xopt,meilleurScore);
+        UtilsSolver.visualizeRes(points,Xopt,meilleurScore);
     }
 }

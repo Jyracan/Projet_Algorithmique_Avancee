@@ -68,7 +68,7 @@ public class EssaisSuccessifs {
         appligibri(points,X,1);
         System.out.println("Le programme a trouvé "+solutionsPossibles.size()+" solutions possibles, en calculant "+cpt+" combinaisons différentes");
 
-        double meilleurScore = UtilsSolver.calculCout(X,points);; //on initialise le meilleur score à la pire valeur possible
+        double meilleurScore = UtilsSolver.calculCout(X,points); //on initialise le meilleur score à la pire valeur possible
         boolean[] Xopt;
 
         Set<Double> keys = solutionsPossibles.keySet();

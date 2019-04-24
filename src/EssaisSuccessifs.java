@@ -29,28 +29,32 @@ public class EssaisSuccessifs {
     }
 
     public static void appligibri_opt(Point[] points,boolean[] X,int i) {
-            if(satisfaisant(i,X)) {
-                boolean el = elagage(points[i]);
-                System.out.println("condition d'élagage :"+el);
-                if (el) {
-                    X[i-1] = true;
-                    if (soltrouvee(i, X)){
-                        boolean opt = optimal(points, X);
-                        System.out.println("solution optimale trouvée : "+opt);
-                        if(opt){
-                            cpt++;
-                            solutionsPossibles.put(scoreOpt, X.clone());
-                        }
-                    } else {
-
-                        appligibri_opt(points, X, i + 1);
+        if(i <= X.length){
+            if(satisfaisant(i,X) && elagage(points[i])) {
+                X[i-1]=true;
+                Point point = dernierSegment.getp1();
+                dernierSegment = new Ligne(dernierSegment.getp2(),points[i]);
+                if(optimal(points,X)){
+                    scoreOpt = UtilsSolver.calculCout(X,points);
+                    if(i == X.length){
+                        cpt++;
+                        solutionsPossibles.put(scoreOpt,X.clone());
+                    }else{
+                        appligibri_opt(points,X,i+1);
                     }
-                    defaire(i, X);
-                } else {
-                    X[i - 1] = false;
-                    appligibri_opt(points, X, i + 1);
                 }
+               X[i-1] = false;
+                dernierSegment = new Ligne(point,dernierSegment.getp1());
+                appligibri_opt(points,X,i+1);
+            }else {
+                X[i-1] = false;
+                if(i == X.length && optimal(points,X)){
+                    cpt++;
+                    solutionsPossibles.put(scoreOpt,X.clone());
+                }
+                appligibri_opt(points,X,i+1);
             }
+        }
     }
 
     public static boolean satisfaisant(int i,boolean[] X){
@@ -61,21 +65,15 @@ public class EssaisSuccessifs {
     }
 
     public static boolean optimal(Point[] points, boolean[] X){
-        if(UtilsSolver.calculCout(X,points) < scoreOpt){
-            scoreOpt = UtilsSolver.calculCout(X,points);
+        if(UtilsSolver.calculCout(X,points) <= scoreOpt){
             return true;
         }
         return false;
     }
 
-    public static void optEncorePossible(){
-
-    }
-
     public static void enregistrer(int i,int xi,boolean[] X){
         if(xi == 1){
             X[i-1] = true;
-            //nbPointsOpt++;
         }
         else{
             X[i-1] = false;
@@ -84,7 +82,6 @@ public class EssaisSuccessifs {
 
     public static void defaire(int i, boolean[] X){
         X[i-1] = false;
-        //nbPointsOpt--;
     }
 
     public static boolean soltrouvee(int i,boolean[] X){
@@ -96,7 +93,6 @@ public class EssaisSuccessifs {
 
     public static boolean elagage(Point point ){
         if(dernierSegment.distance(point) > 2*PENALITE){
-            dernierSegment = new Ligne(dernierSegment.getp2(),point);
             return true;
         }
         return false;
@@ -112,7 +108,6 @@ public class EssaisSuccessifs {
         for(boolean b: X) b = false;
 
         dernierSegment = new Ligne(points[0],points[setPoint.size()-1]);
-        //nbPointsOpt = 2;
         solutionsPossibles = new HashMap<>();
         scoreOpt = UtilsSolver.calculCout(X,points);
 
@@ -120,7 +115,7 @@ public class EssaisSuccessifs {
         appligibri_opt(points,X,1);
         System.out.println("Le programme a trouvé "+solutionsPossibles.size()+" solutions possibles, en calculant "+cpt+" combinaisons différentes");
 
-        double meilleurScore = UtilsSolver.calculCout(X,points);; //on initialise le meilleur score à la pire valeur possible
+        double meilleurScore = UtilsSolver.calculCout(X,points); //on initialise le meilleur score à la pire valeur possible
         boolean[] Xopt;
 
         Set<Double> keys = solutionsPossibles.keySet();

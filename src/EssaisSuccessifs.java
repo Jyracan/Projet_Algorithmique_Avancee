@@ -6,8 +6,11 @@ import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResol
 
 public class EssaisSuccessifs {
 
+    public static final double PENALITE = 1.5;
     private static HashMap<Double,boolean[]> solutionsPossibles;
     private static int cpt = 0;
+    private static Ligne dernierSegment;
+    private static double scoreOpt;
 
     public static void appligibri(Point[] points,boolean[] X,int i) {
         int[] Si = new int[]{0,1};
@@ -25,6 +28,31 @@ public class EssaisSuccessifs {
         }
     }
 
+    public static void appligibri_opt(Point[] points,boolean[] X,int i) {
+            if(satisfaisant(i,X)) {
+                boolean el = elagage(points[i]);
+                System.out.println("condition d'élagage :"+el);
+                if (el) {
+                    X[i-1] = true;
+                    if (soltrouvee(i, X)){
+                        boolean opt = optimal(points, X);
+                        System.out.println("solution optimale trouvée : "+opt);
+                        if(opt){
+                            cpt++;
+                            solutionsPossibles.put(scoreOpt, X.clone());
+                        }
+                    } else {
+
+                        appligibri_opt(points, X, i + 1);
+                    }
+                    defaire(i, X);
+                } else {
+                    X[i - 1] = false;
+                    appligibri_opt(points, X, i + 1);
+                }
+            }
+    }
+
     public static boolean satisfaisant(int i,boolean[] X){
         if(i <= X.length){
             return true;
@@ -32,9 +60,22 @@ public class EssaisSuccessifs {
         return false;
     }
 
+    public static boolean optimal(Point[] points, boolean[] X){
+        if(UtilsSolver.calculCout(X,points) < scoreOpt){
+            scoreOpt = UtilsSolver.calculCout(X,points);
+            return true;
+        }
+        return false;
+    }
+
+    public static void optEncorePossible(){
+
+    }
+
     public static void enregistrer(int i,int xi,boolean[] X){
         if(xi == 1){
             X[i-1] = true;
+            //nbPointsOpt++;
         }
         else{
             X[i-1] = false;
@@ -43,10 +84,19 @@ public class EssaisSuccessifs {
 
     public static void defaire(int i, boolean[] X){
         X[i-1] = false;
+        //nbPointsOpt--;
     }
 
     public static boolean soltrouvee(int i,boolean[] X){
         if(i == X.length){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean elagage(Point point ){
+        if(dernierSegment.distance(point) > 2*PENALITE){
+            dernierSegment = new Ligne(dernierSegment.getp2(),point);
             return true;
         }
         return false;
@@ -61,11 +111,13 @@ public class EssaisSuccessifs {
         boolean[] X =  new boolean[setPoint.size() - 2];
         for(boolean b: X) b = false;
 
-        double dernierPointExplore =  points[0].getx();
-        double scoreOpt = UtilsSolver.calculCout(X,points);
+        dernierSegment = new Ligne(points[0],points[setPoint.size()-1]);
+        //nbPointsOpt = 2;
         solutionsPossibles = new HashMap<>();
+        scoreOpt = UtilsSolver.calculCout(X,points);
 
-        appligibri(points,X,1);
+        //appligibri(points,X,1);
+        appligibri_opt(points,X,1);
         System.out.println("Le programme a trouvé "+solutionsPossibles.size()+" solutions possibles, en calculant "+cpt+" combinaisons différentes");
 
         double meilleurScore = UtilsSolver.calculCout(X,points);; //on initialise le meilleur score à la pire valeur possible

@@ -37,7 +37,7 @@ public class UtilsSolver {
         }
         segmentCourant = new Ligne(pointCourant, points[points.length-1]);
 
-        cout += nbPointSegment * PENALITE;
+        cout += segmentDroite.size() * PENALITE;
         for (Point point : pointHorsLigne){
             cout += segmentCourant.distance(point);
         }
@@ -53,6 +53,7 @@ public class UtilsSolver {
         Point pointCourant= points[0];
         Ligne segmentCourant;
         int cpt=1;
+
         for (boolean isPresent : present){
             if(isPresent){
                 pointSuivant = points[cpt];

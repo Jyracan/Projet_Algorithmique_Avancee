@@ -44,6 +44,13 @@ public class UtilsSolver {
         return cout;
     }
 
+    /**
+     * Fonction pour calculer SD utile
+     * @param i indice du premier point du segment
+     * @param j indice du deuxième point du segment
+     * @param points tableau de points
+     * @return La somme des distances des points d'indice entre i et j à la droite formé par i et j
+     */
     public static double SD (int i, int j, Point[] points){
         Ligne ligne = new Ligne(points[i],points[j]);
         double res =0;
@@ -84,7 +91,6 @@ public class UtilsSolver {
         Point tmp;
         while(it.hasNext()){
             tmp = it.next();
-            System.out.println("Ajout du point X= " + tmp.getx() + " Y= " + tmp.gety());
             points[(int)tmp.getx() - 1] = tmp;
         }
         return points;

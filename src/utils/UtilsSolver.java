@@ -44,6 +44,14 @@ public class UtilsSolver {
         return cout;
     }
 
+    public static double SD (int i, int j, Point[] points){
+        Ligne ligne = new Ligne(points[i],points[j]);
+        double res =0;
+        for(int cpt = i+1; cpt < j; cpt ++){
+            res += ligne.distance(points[cpt]);
+        }
+        return res;
+    }
 
     public static void visualizeRes (Point[] points, boolean[] present, double score){
         Set<Point> p = new HashSet<>();

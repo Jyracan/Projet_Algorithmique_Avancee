@@ -7,7 +7,6 @@ import java.util.HashSet;
 public class ProgDynamique {
 
     private static double[] [] SDtable; // Table des valeurs de SD pour gagner du temps.
-    private static boolean[]  estPresent;   // Structure pour connaître les points appartenant à la droite brisé
     private static double[][] approxoptTable;    // Structure tabulaire utilisé pour la programmation dynamique
 
     /**
@@ -49,34 +48,30 @@ public class ProgDynamique {
         System.out.println("Début de la procédure de programmation dynamique");
         double res=-1;
         double tmp;
-        int ptIntermediaire=1;
         approxoptTable = new double[n][n];
         for(int i=0 ; i<n; i++){
             for(int j=n-1; j>=0; j--){
                 if(i==j){
                     approxoptTable[i][j]=0;
                 }else if(i>j){
-                    System.out.println("\n  calcul approxopt [" + j +"," +i +"]\n###");
+                    System.out.println("\n  calcul approxopt [" + j +"," +i +"]\n===");
                     for (int l=j+1; l<=i; l++){
                         tmp = (SDtable[j][l] + UtilsSolver.PENALITE) + approxoptTable[l][i];
-                        System.out.println("SD["+j+","+l+"] + " + 1.5 + " + approxopt["+l+","+i+"]" );
+                        System.out.println("SD["+j+","+l+"] + " + 1.5 + " + approxopt["+l+","+i+"] = " + tmp );
                         if(res == -1){
                             System.out.println("Premier minimum trouvé " + tmp);
                             res = tmp;
-                            ptIntermediaire=l;
                         }else if(tmp<res){
                             System.out.println("Nouveau minimum trouvé " + tmp);
                             res=tmp;
-                            ptIntermediaire=l;
                         }
                     }
                     approxoptTable[j][i]=res;
-                    estPresent[ptIntermediaire-1] = true;
                     res = -1;
                 }
             }
         }
-        System.out.println("Fin d'initialisation du tableau d'approximation");
+        System.out.println("Fin d'initialisation du tableau d'approximation\n");
         affiche(approxoptTable);
 
     }
@@ -84,13 +79,13 @@ public class ProgDynamique {
     public static void main(String[] args) {
         System.out.println("Lancement de la résolution par programmation dynamique");
         HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
-        System.out.println("Initialisation des structures de données\n###");
+        System.out.println("\n  Initialisation des structures de données\n###");
         Point[] points = UtilsSolver.transformToTab(setPoint);
         int n = points.length;
         calculSD(points);
-        estPresent = new boolean[n];
+        System.out.println("\n  Fin d'initialisation des structures de données\n###");
         remplissageApproxopt(n);
-        double score=approxoptTable[n-1][0];
-        UtilsSolver.visualizeRes (points, estPresent, score);
+        double score=approxoptTable[0][n-1];
+        System.out.println("\nMeilleur score trouvé : " + score +"\n-----------------------------------------");
     }
 }

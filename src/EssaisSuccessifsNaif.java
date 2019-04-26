@@ -5,13 +5,10 @@ import java.util.*;
 
 public class EssaisSuccessifsNaif {
 
-    public static final double PENALITE = 1.5;
     private static HashMap<Double,boolean[]> solutionsPossibles;
     private static int cpt = 0;
-    private static Ligne dernierSegment;
-    private static double scoreOpt;
 
-    public static void appligibri(Point[] points,boolean[] X,int i) {
+    private static void appligibri(Point[] points,boolean[] X,int i) {
         int[] Si = new int[]{0,1};
         for(int xi: Si){
             if(satisfaisant(i,X)){
@@ -28,34 +25,22 @@ public class EssaisSuccessifsNaif {
     }
 
 
-    public static boolean satisfaisant(int i,boolean[] X){
-        if(i <= X.length){
-            return true;
-        }
-        return false;
+    private static boolean satisfaisant(int i,boolean[] X){
+        return (i <= X.length);
     }
 
 
-    public static void enregistrer(int i,int xi,boolean[] X){
-        if(xi == 1){
-            X[i-1] = true;
-        }
-        else{
-            X[i-1] = false;
-        }
+    private static void enregistrer(int i,int xi,boolean[] X){
+            X[i-1] = (xi == 1);
     }
 
-    public static void defaire(int i, boolean[] X){
+    private static void defaire(int i, boolean[] X){
         X[i-1] = false;
     }
 
-    public static boolean soltrouvee(int i,boolean[] X){
-        if(i == X.length){
-            return true;
-        }
-        return false;
+    private static boolean soltrouvee(int i,boolean[] X) {
+        return (i == X.length);
     }
-
 
     public static void main(String[] args) {
         HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
@@ -64,11 +49,8 @@ public class EssaisSuccessifsNaif {
         points = UtilsSolver.transformToTab(setPoint);
 
         boolean[] X =  new boolean[setPoint.size() - 2];
-        for(boolean b: X) b = false;
 
-        dernierSegment = new Ligne(points[0],points[setPoint.size()-1]);
         solutionsPossibles = new HashMap<>();
-        scoreOpt = UtilsSolver.calculCout(X,points);
 
         appligibri(points,X,1);
         System.out.println("Le programme a trouvé "+solutionsPossibles.size()+" solutions possibles, en calculant "+cpt+" combinaisons différentes");
@@ -77,10 +59,8 @@ public class EssaisSuccessifsNaif {
         boolean[] Xopt;
 
         Set<Double> keys = solutionsPossibles.keySet();
-        Iterator<Double> it = keys.iterator();
-        while (it.hasNext()){
-            double scoreCourant = it.next();
-            if(scoreCourant < meilleurScore){
+        for (double scoreCourant : keys) {
+            if (scoreCourant < meilleurScore) {
                 meilleurScore = scoreCourant;
             }
         }

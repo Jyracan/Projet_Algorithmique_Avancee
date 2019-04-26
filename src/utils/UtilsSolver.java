@@ -6,17 +6,25 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class UtilsSolver {
-
+    /**
+     * Constante déterminant la pénalité reçu en créant un segment
+     */
     public static final double PENALITE = 1.5;
 
 
+    /**
+     * Fonction permettant de calculer le coût d'une solution
+     * @param present liste des points faisant partie de la solution
+     * @param points liste des points
+     * @return Renvoit le score correspondant a la solution
+     */
     public static double calculCout (boolean[] present,  Point[] points){    // TODO : Refactor !
         double cout = 0;
-        Point pointCourant = points[0];
-        Point pointSuivant;
+        Point pointCourant = points[0]; // A trnasformer en indice
+        Point pointSuivant; // A transformer en indice
         Ligne segmentCourant;
-        Set<Point> pointHorsLigne = new HashSet<Point>();
-        Set<Ligne> segmentDroite = new HashSet<Ligne>();
+        Set<Point> pointHorsLigne = new HashSet<Point>(); // Ne sert plus avec SD
+        Set<Ligne> segmentDroite = new HashSet<Ligne>(); // On peut l'enlever en mettant juste un compteur
         int cpt=1;
         for (boolean isPresent : present){
             if(isPresent){
@@ -87,9 +95,14 @@ public class UtilsSolver {
         Visu v = new Visu(p,segmentDroite,"Solution de score " + score);
     }
 
+    /**
+     * Transforme un set de point en un tableau de point
+     * @param setPoint set de points
+     * @return un tableau de points
+     */
     public static Point[] transformToTab (HashSet<Point> setPoint){
         int nbPoints = setPoint.size();
-        //Initialisation du tableau de point pour les obtenirs plus facilement
+        //Initialisation du tableau de point pour les récupérer plus facilement
         Point[] points = new Point[nbPoints];
         Iterator<Point> it = setPoint.iterator();
         Point tmp;

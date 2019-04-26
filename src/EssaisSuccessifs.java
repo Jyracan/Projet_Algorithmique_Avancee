@@ -10,7 +10,7 @@ public class EssaisSuccessifs {
     private static Ligne dernierSegment;
     private static double scoreOpt;
 
-    public static void appligibri_opt(Point[] points,boolean[] X,int i) {
+    private static void appligibri_opt(Point[] points,boolean[] X,int i) {
         if(i <= X.length){
             if(satisfaisant(i,X) && elagage(points[i])) {
                 X[i-1]=true;
@@ -39,25 +39,16 @@ public class EssaisSuccessifs {
         }
     }
 
-    public static boolean satisfaisant(int i,boolean[] X){
-        if(i <= X.length){
-            return true;
-        }
-        return false;
+    private static boolean satisfaisant(int i,boolean[] X){
+        return (i <= X.length);
     }
 
-    public static boolean optimal(Point[] points, boolean[] X){
-        if(UtilsSolver.calculCout(X,points) <= scoreOpt){
-            return true;
-        }
-        return false;
+    private static boolean optimal(Point[] points, boolean[] X){
+        return (UtilsSolver.calculCout(X,points) <= scoreOpt);
     }
 
-    public static boolean elagage(Point point ){
-        if(dernierSegment.distance(point) > 2* UtilsSolver.PENALITE){
-            return true;
-        }
-        return false;
+    private static boolean elagage(Point point ){
+        return (dernierSegment.distance(point) > 2* UtilsSolver.PENALITE);
     }
 
     public static void main(String[] args) {
@@ -67,7 +58,6 @@ public class EssaisSuccessifs {
         points = UtilsSolver.transformToTab(setPoint);
 
         boolean[] X =  new boolean[setPoint.size() - 2];
-        for(boolean b: X) b = false;
 
         dernierSegment = new Ligne(points[0],points[setPoint.size()-1]);
         solutionsPossibles = new HashMap<>();
@@ -80,10 +70,8 @@ public class EssaisSuccessifs {
         boolean[] Xopt;
 
         Set<Double> keys = solutionsPossibles.keySet();
-        Iterator<Double> it = keys.iterator();
-        while (it.hasNext()){
-            double scoreCourant = it.next();
-            if(scoreCourant < meilleurScore){
+        for (double scoreCourant : keys) {
+            if (scoreCourant < meilleurScore) {
                 meilleurScore = scoreCourant;
             }
         }

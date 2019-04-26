@@ -18,10 +18,8 @@ public class UtilsSolver {
         Set<Point> pointHorsLigne = new HashSet<Point>();
         Set<Ligne> segmentDroite = new HashSet<Ligne>();
         int cpt=1;
-        int nbPointSegment=2;
         for (boolean isPresent : present){
             if(isPresent){
-                nbPointSegment++;
                 pointSuivant = points[cpt];
                 segmentCourant = new Ligne(pointCourant, pointSuivant);
                 segmentDroite.add(segmentCourant);
@@ -36,7 +34,7 @@ public class UtilsSolver {
             cpt++;
         }
         segmentCourant = new Ligne(pointCourant, points[points.length-1]);
-
+        segmentDroite.add(segmentCourant);
         cout += segmentDroite.size() * PENALITE;
         for (Point point : pointHorsLigne){
             cout += segmentCourant.distance(point);
@@ -60,6 +58,12 @@ public class UtilsSolver {
         return res;
     }
 
+    /**
+     * Fonction pour visualiser la droite brisée
+     * @param points tableau de point
+     * @param present tableau indiquant les points dans la droite brisée
+     * @param score score relatif a la solution visualisé
+     */
     public static void visualizeRes (Point[] points, boolean[] present, double score){
         Set<Point> p = new HashSet<>();
         p.addAll(Arrays.asList(points));

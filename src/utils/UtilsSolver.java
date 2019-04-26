@@ -18,10 +18,8 @@ public class UtilsSolver {
         Set<Point> pointHorsLigne = new HashSet<Point>();
         Set<Ligne> segmentDroite = new HashSet<Ligne>();
         int cpt=1;
-        int nbPointSegment=2;
         for (boolean isPresent : present){
             if(isPresent){
-                nbPointSegment++;
                 pointSuivant = points[cpt];
                 segmentCourant = new Ligne(pointCourant, pointSuivant);
                 segmentDroite.add(segmentCourant);

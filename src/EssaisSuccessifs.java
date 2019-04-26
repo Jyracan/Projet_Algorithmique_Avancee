@@ -9,7 +9,7 @@ public class EssaisSuccessifs {
     private static int cpt = 0;
     private static double scoreOpt;
 
-    public static void appligibri_opt(Point[] points,boolean[] X,int i) {
+    private static void appligibri_opt(Point[] points,boolean[] X,int i) {
        int[] Si = new int[]{0,1};
        for(int xi: Si){
            if (satisfaisant(i, X)){
@@ -28,39 +28,25 @@ public class EssaisSuccessifs {
        }
     }
 
-    public static void enregistrer(int i,int xi,boolean[] X){
-        if(xi == 1){
-            X[i-1] = true;
-        }
-        else{
-            X[i-1] = false;
-        }
+    private static void enregistrer(int i,int xi,boolean[] X){
+        X[i-1] = (xi == 1);
     }
 
-    public static void defaire(int i, boolean[] X){
+    private static void defaire(int i, boolean[] X){
         X[i-1] = false;
     }
 
-    public static boolean soltrouvee(int i,boolean[] X){
-        if(i == X.length){
-            return true;
-        }
-        return false;
+    private static boolean soltrouvee(int i,boolean[] X){
+        return (i == X.length);
     }
 
 
-    public static boolean satisfaisant(int i,boolean[] X){
-        if(i <= X.length){
-            return true;
-        }
-        return false;
+    private static boolean satisfaisant(int i,boolean[] X){
+        return (i <= X.length);
     }
 
-    public static boolean elagage(Point[] points, boolean[] X){
-        if(UtilsSolver.calculCout(X,points) <= scoreOpt){
-            return true;
-        }
-        return false;
+    private static boolean elagage(Point[] points, boolean[] X){
+       return (UtilsSolver.calculCout(X,points) <= scoreOpt);
     }
 
 
@@ -71,7 +57,6 @@ public class EssaisSuccessifs {
         points = UtilsSolver.transformToTab(setPoint);
 
         boolean[] X =  new boolean[setPoint.size() - 2];
-        for(boolean b: X) b = false;
 
         solutionsPossibles = new HashMap<>();
         scoreOpt = UtilsSolver.calculCout(X,points);
@@ -83,10 +68,8 @@ public class EssaisSuccessifs {
         boolean[] Xopt;
 
         Set<Double> keys = solutionsPossibles.keySet();
-        Iterator<Double> it = keys.iterator();
-        while (it.hasNext()){
-            double scoreCourant = it.next();
-            if(scoreCourant < meilleurScore){
+        for (double scoreCourant : keys) {
+            if (scoreCourant < meilleurScore) {
                 meilleurScore = scoreCourant;
             }
         }

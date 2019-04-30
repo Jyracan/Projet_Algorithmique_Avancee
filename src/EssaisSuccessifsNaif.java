@@ -7,9 +7,10 @@ public class EssaisSuccessifsNaif {
 
     private static HashMap<Double,boolean[]> solutionsPossibles;
     private static int cpt = 0;
+    private static int[] Si;
 
     private static void appligibri(Point[] points,boolean[] X,int i) {
-        int[] Si = new int[]{0,1};
+        Si = new int[]{0,1};
         for(int xi: Si){
             if(satisfaisant(i,X)){
                 enregistrer(i,xi,X);
@@ -19,7 +20,7 @@ public class EssaisSuccessifsNaif {
                 }else {
                     appligibri(points,X,i+1);
                 }
-                defaire(i,X); // ici ne sert à rien car il n'y a pas de mauvaise solution
+                defaire(i,X);
             }
         }
     }

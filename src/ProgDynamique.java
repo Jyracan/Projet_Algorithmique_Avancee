@@ -24,7 +24,7 @@ public class ProgDynamique {
             }
         }
         System.out.println("Fin d'initialisation du tableau SD");
-        affiche(SDtable);
+        //affiche(SDtable);
     }
 
     /**
@@ -54,15 +54,15 @@ public class ProgDynamique {
                 if(i==j){
                     approxoptTable[i][j]=0;
                 }else if(i>j){
-                    System.out.println("\n  calcul approxopt [" + j +"," +i +"]\n===");
+                    //System.out.println("\n  calcul approxopt [" + j +"," +i +"]\n===");
                     for (int l=j+1; l<=i; l++){
                         tmp = (SDtable[j][l] + UtilsSolver.PENALITE) + approxoptTable[l][i];
-                        System.out.println("SD["+j+","+l+"] + " + 1.5 + " + approxopt["+l+","+i+"] = " + tmp );
+                        //System.out.println("SD["+j+","+l+"] + " + UtilsSolver.PENALITE + " + approxopt["+l+","+i+"] = " + tmp );
                         if(res == -1){
-                            System.out.println("Premier minimum trouvé " + tmp);
+                            //System.out.println("Premier minimum trouvé " + tmp);
                             res = tmp;
                         }else if(tmp<res){
-                            System.out.println("Nouveau minimum trouvé " + tmp);
+                            //System.out.println("Nouveau minimum trouvé " + tmp);
                             res=tmp;
                         }
                     }
@@ -72,20 +72,28 @@ public class ProgDynamique {
             }
         }
         System.out.println("Fin d'initialisation du tableau d'approximation\n");
-        affiche(approxoptTable);
+        //affiche(approxoptTable);
 
     }
-
-    public static void main(String[] args) {
-        System.out.println("Lancement de la résolution par programmation dynamique");
+    public static double findBest (){
         HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
         System.out.println("\n  Initialisation des structures de données\n###");
+        long tpsDebut = System.currentTimeMillis();
+        System.out.println("Temps début = " + tpsDebut);
         Point[] points = UtilsSolver.transformToTab(setPoint);
         int n = points.length;
         calculSD(points);
         System.out.println("\n  Fin d'initialisation des structures de données\n###");
         remplissageApproxopt(n);
-        double score=approxoptTable[0][n-1];
+        long tpsFin= System.currentTimeMillis();
+        System.out.println("Temps début = " + tpsFin);
+        System.out.println("Temps total d'exécution :" + (tpsFin - tpsDebut) + " ms.");
+        return(approxoptTable[0][n-1]);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Lancement de la résolution par programmation dynamique :");
+        double score = findBest();
         System.out.println("\nMeilleur score trouvé : " + score +"\n-----------------------------------------");
     }
 }

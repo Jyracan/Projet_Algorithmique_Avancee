@@ -97,10 +97,15 @@ public class EssaisSuccessifsNaif {
         points = UtilsSolver.transformToTab(setPoint); // on construit un tableau contenant les points que l'on a récupéré
 
         boolean[] X =  new boolean[setPoint.size() - 2]; // initilisation
+        for(boolean x : X) x = false;
+        Xopt = X.clone();
 
         scoreOpt = UtilsSolver.calculCout(X,points); // on initialise le coût optimal à la valeur du coup de la ligne brisée ne contenant que le premier et le dernier point
 
+        long tpsDebut = System.currentTimeMillis();
         appligibri(points,X,1);
+        long tpsFin= System.currentTimeMillis();
+        System.out.println("Temps total d'exécution :" + (tpsFin - tpsDebut) + " ms.");
 
         UtilsSolver.visualizeRes(points,Xopt,scoreOpt); //tracé de la solution optimale et affichage du score correspondant
     }

@@ -75,17 +75,23 @@ public class ProgDynamique {
         //affiche(approxoptTable);
 
     }
+
+    /**
+     * Fonction utilisé pour trouver le meileur score possible
+     * @return  Le meilleur score possible
+     */
     public static double findBest (){
-        HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
         System.out.println("\n  Initialisation des structures de données\n###");
-        long tpsDebut = System.currentTimeMillis();
+        HashSet<Point> setPoint = (HashSet<Point>) Parser.recuperePoints();    //On récupère un set de point
+        long tpsDebut = System.currentTimeMillis(); // On enregistre le moment où l'on débute l'éxécution
         System.out.println("Temps début = " + tpsDebut);
         Point[] points = UtilsSolver.transformToTab(setPoint);
         int n = points.length;
         calculSD(points);
         System.out.println("\n  Fin d'initialisation des structures de données\n###");
+
         remplissageApproxopt(n);
-        long tpsFin= System.currentTimeMillis();
+        long tpsFin= System.currentTimeMillis(); // On a trouvé la meilleure solution, on arrête le chrono
         System.out.println("Temps début = " + tpsFin);
         System.out.println("Temps total d'exécution :" + (tpsFin - tpsDebut) + " ms.");
         return(approxoptTable[0][n-1]);

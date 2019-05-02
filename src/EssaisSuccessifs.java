@@ -108,11 +108,6 @@ public class EssaisSuccessifs {
         points = UtilsSolver.transformToTab(setPoint);
 
         boolean[] X =  new boolean[setPoint.size() - 2];
-        /*for (int i = 0; i < X.length; i ++){
-            if(i % 2 != 0){
-                X[i] = true;
-            }
-        }*/
 
         solutionsPossibles = new HashMap<>();
         double scoreOpt = UtilsSolver.calculCout(X,points); // on initialise le coût optimal à la valeur du coup de la ligne brisée ne contenant que le premier et le dernier point

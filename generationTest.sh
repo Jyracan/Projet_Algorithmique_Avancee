@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#for j in `seq 1 20`	
-#do
-	for i in `seq 1 2350`	
+for j in `seq 1 20`
+do
+	for i in `seq 1 $j`	
 	do
-		echo $i $((RANDOM%2350)) >> ./test/2350.txt
+		echo $i $((RANDOM%$j)) >> ./test/$j.txt
 	done
-#done
+done
 
 exit 0
 

@@ -7,10 +7,10 @@ import java.util.HashSet;
 public class ProgDynamique {
 
     private static double[] [] SDtable; // Table des valeurs de SD pour gagner du temps.
-    private static double[][] approxoptTable;    // Structure tabulaire utilisé pour la programmation dynamique
+    private static double[][] approxoptTable;    // Structure tabulaire utilisée pour la programmation dynamique
 
     /**
-     * Fonction pour remplir SDtable qui est un tableau sotckant SD(i,j) à la position [i][j] pour éviter de devoir le calculer plusieurs fois
+     * Fonction pour remplir SDtable qui est un tableau stockant SD(i,j) à la position [i][j] pour éviter de le calculer plusieurs fois
      * @param points tableau de points
      */
     private static void calculSD(Point[] points){
@@ -42,7 +42,7 @@ public class ProgDynamique {
 
     /**
      * Fonction pour remplir la structure tabulaire permettant de calculer la solution optimale via programmation dynamique
-     * @param n nombre de point
+     * @param n nombre de points
      */
     private static void remplissageApproxopt(int n){
         System.out.println("Début de la procédure de programmation dynamique");

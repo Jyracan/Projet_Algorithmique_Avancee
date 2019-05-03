@@ -27,7 +27,7 @@ Les fonctions spécifiques aux différentes méthode de résolution sont dans le
 
 ## Test :
 
-Les fichiers tst1 et 2 sont ceux fournis sur moodle.
+Les fichiers tst1 et 2 sont ceux fournis par nos enseignants.
 
 Nous avons crée à la main les fichiers tst3 - 8 pour tester nos programmes.
 

@@ -1,6 +1,6 @@
 # Algorithmique avancée
 
-Java 1.8
+**Langage :** Java 1.8
 
 ## Description du sujet :
 

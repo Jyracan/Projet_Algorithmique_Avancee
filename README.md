@@ -18,20 +18,23 @@ Le but de ce projet sera de trouver la meilleure approximation de l’ensemble d
 ## Contenu du projet :
 
 Nous avons résolu le problème en utilisant deux approches différentes, par essais successifs et par programmation dynamique.
-Vous trouverez dans ce projet une classe "EssaisSuccessifsNaif" qui correspond à notre première itération de l'essais successif sans élagage.
+Vous trouverez dans ce projet une classe "EssaisSuccessifsNaif" qui correspond à notre première version de la méthode par essais successifs sans élagage.
 
 ## Structure du projet :
 
-Vous trouverez dans le package 'utils' toute les fonctions générique qui nous ont permis de résoudre le problème (parser, calcul de distance etc ...). 
-Les fonctions spécifiques aux différentes méthode de résolution sont dans les classes associé.
+Vous trouverez dans le package 'utils' toute les fonctions génériques qui nous ont permis de résoudre le problème (parser, calcul de distance etc ...). 
+Les fonctions spécifiques aux différentes méthodes de résolution sont dans les classes associées.
 
 ## Test :
 
+Les fichiers de test sont disponibles dans le dossier test. Vous trouverez dans des dossiers spécifiques des fichiers de tests pour les différentes méthodes de résolution.
+Un jeu de tests commun est également disponible dans le dossier "Jeu de test initial", pour pouvoir comparer les résultats des différentes méthodes.
+
 Les fichiers tst1 et 2 sont ceux fournis par nos enseignants.
 
-Nous avons crée à la main les fichiers tst3 - 8 pour tester nos programmes.
+Nous avons créé à la main les fichiers tst3 - 8 pour tester nos programmes.
 
 Pour tracer les courbes de complexité, nous avons généré des points aléatoirement à l'aide du script bash que vous trouverez à la racine du projet 'generationTest.sh'.
-La génération des fichiers est faites de tel sorte que l'ensemble des n points se trouvent entre 1 et n.
+La génération des fichiers est faite de telle sorte que l'ensemble des n points se trouvent entre 1 et n.
 
-Vous trouverez les résultats des tests dans les fichiers csv aussi à la racine du projet.
+Vous trouverez les résultats des tests dans les fichiers csv, présents à la racine du projet.
